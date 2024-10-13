@@ -19,11 +19,10 @@ class Chain:
             ### SCRAPED TEXT FROM WEBSITE:
             {page_data}
             ### INSTRUCTION:
-            The scraped text is from the career's page of a website.
-            Your job is to extract the job postings and return them in JSON format containing the following keys: `role`, `experience`, `skills` and `description`.
-            Only return the valid JSON.
-            ### VALID JSON (NO PREAMBLE):
+            Your job is to extract the **first** job posting and return it in JSON format containing the following keys: `role`, `experience`, `skills`, and `description`. 
+            Ignore any subsequent job postings and do not return any additional text, only return the valid JSON.
             """
+
         )
         chain_extract = prompt_extract | self.llm
         res = chain_extract.invoke(input={"page_data": cleaned_text})
